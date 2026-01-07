@@ -8,7 +8,7 @@ public class Watchlist : Dictionary<string, string>
         Add("ETH", "Ethereum");
         Add("XRP", "XRP");
         Add("XMR", "Monero");
-        Add("XAUT", "Tether Gold");
+        Add("XAUt", "Tether Gold");
         Add("KAS", "Kaspa");
         Add("FIL", "Filecoin");
         Add("BAT", "Basic Attention Token");
