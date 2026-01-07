@@ -2,18 +2,17 @@
 
 public static class PresentationService
 {
-    public static void Show(Root? root, Watchlist watchlist)
+    public static string Show(Root? root, Watchlist watchlist)
     {
         if (root is null || root.data is null)
-        {
-            Console.WriteLine("No data available.");
-            return;
-        }
+            return "No data available.";
         var matches = root.data.Join(watchlist, 
                                  datum => datum.name,
                                  watched => watched,
                                  (datum, watched) => datum);
+        var sb = new System.Text.StringBuilder();
         foreach (var crypto in matches)
-            Console.WriteLine($"{crypto.name} ({crypto.symbol}): ${crypto.quote.USD.price:F2}");
+            sb.AppendLine($"{crypto.name} ({crypto.symbol}): ${crypto.quote.USD.price:F2}");
+        return sb.ToString();
     }
 }

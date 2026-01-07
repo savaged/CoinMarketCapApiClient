@@ -1,5 +1,7 @@
 ﻿using CoinMarketCapApiClient;
 
+var watchlist = new Watchlist();
 var model = await CoinMarketCapApiService.LoadLatestAsync();
 
-Console.WriteLine(model?.status?.total_count);
+Console.WriteLine(PresentationService.Show(model, watchlist));
+
