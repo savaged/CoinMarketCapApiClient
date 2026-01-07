@@ -1,18 +1,18 @@
 ﻿namespace CoinMarketCapApiClient;
 
-public class Watchlist : List<string>
+public class Watchlist : Dictionary<string, string>
 {
     public Watchlist()
     {
-        Add("BTC");
-        Add("ETH");
-        Add("XRP");
-        Add("XMR");
-        Add("XAUT");
-        Add("KAS");
-        Add("FIL");
-        Add("BAT");
-        Add("QRL");
-        Add("ZANO");
+        Add("BTC", "Bitcoin");
+        Add("ETH", "Ethereum");
+        Add("XRP", "XRP");
+        Add("XMR", "Monero");
+        Add("XAUT", "Tether Gold");
+        Add("KAS", "Kaspa");
+        Add("FIL", "Filecoin");
+        Add("BAT", "Basic Attention Token");
+        Add("QRL", "Quantum Resistant Ledger");
+        Add("ZANO", "Zano");
     }
 }
