@@ -8,17 +8,36 @@ public static class PresentationService
             return "No data available!";
         if (watchlist is null || watchlist.Count == 0)
             return "Empty watchlist!";
-        var matches = root.data.Where(datum =>
+        return Convert(Convert(Filter(root, watchlist)));
+    }
+
+    private static IEnumerable<Datum> Filter(Root root, Watchlist watchlist) =>
+        root.data.Where(datum =>
             datum.symbol is not null
             && watchlist.ContainsKey(datum.symbol)
             && watchlist[datum.symbol] == datum.name);
+
+    private static IEnumerable<Crypto> Convert(IEnumerable<Datum> data)
+    {
+        if (data is null)
+            return [];
+        List<Crypto> list = [];
+        foreach (var d in data)
+            list.Add(new Crypto(d));
+        return list;
+    }
+
+    private static string Convert(IEnumerable<Crypto> list)
+    {
+        if (list is null)
+            return string.Empty;
         var sb = new System.Text.StringBuilder();
-        foreach (var crypto in matches)
+        foreach (var crypto in list)
             sb.AppendLine(Line(crypto));
         return sb.ToString();
     }
 
-    private static string Line(Datum d) =>
-        $"{d.name} ({d.symbol}): ${d.quote.USD.price:F2} {d.quote.USD.percent_change_1h:F2}%";
+    private static string Line(Crypto c) =>
+        $"{c.Name} ({c.Symbol}): ${c.Price:F2} {c.Percent_change_1h:F2}%";
 
 }
