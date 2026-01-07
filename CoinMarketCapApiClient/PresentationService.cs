@@ -14,7 +14,11 @@ public static class PresentationService
             && watchlist[datum.symbol] == datum.name);
         var sb = new System.Text.StringBuilder();
         foreach (var crypto in matches)
-            sb.AppendLine($"{crypto.name} ({crypto.symbol}): ${crypto.quote.USD.price:F2}");
+            sb.AppendLine(Line(crypto));
         return sb.ToString();
     }
+
+    private static string Line(Datum d) =>
+        $"{d.name} ({d.symbol}): ${d.quote.USD.price:F2} {d.quote.USD.percent_change_1h:F2}%";
+
 }
