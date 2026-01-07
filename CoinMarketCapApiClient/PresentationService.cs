@@ -7,7 +7,7 @@ public static class PresentationService
         if (root is null || root.data is null)
             return "No data available.";
         var matches = root.data.Join(watchlist, 
-                                 datum => datum.name,
+                                 datum => datum.symbol,
                                  watched => watched,
                                  (datum, watched) => datum);
         var sb = new System.Text.StringBuilder();
