@@ -10,6 +10,8 @@ var view = new ConsoleView()
 {
     DataContext = new MainViewModel(coinMarketCapApiService)
 };
+
+// TODO add timed loop for clear, load and show
 await view.LoadAsync();
 view.Show();
 
