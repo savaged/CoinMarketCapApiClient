@@ -32,6 +32,7 @@ public static class ConfigBuilder
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
             .AddEnvironmentVariables();
-        return builder.Build();
+        var config = builder.Build();
+        return config;
     }
 }
