@@ -1,7 +1,9 @@
 ﻿using CoinMarketCapApiClient;
 
-var vm = new ViewModel();
-var view = new View();
+var view = new View()
+{
+    DataContext = new ViewModel()
+};
 await view.LoadAsync();
 view.Show();
 
