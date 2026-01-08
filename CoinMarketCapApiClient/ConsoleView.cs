@@ -2,7 +2,7 @@
 
 namespace CoinMarketCapApiClient;
 
-public class View : IView
+public class ConsoleView : IView
 {
     public object? DataContext { get; set; }
 

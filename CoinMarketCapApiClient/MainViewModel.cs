@@ -1,10 +1,10 @@
 ﻿namespace CoinMarketCapApiClient;
 
-public class ViewModel : IIndexViewModel
+public class MainViewModel : IIndexViewModel
 {
     private readonly ICoinMarketCapApiService _coinMarketCapApiService;
 
-    public ViewModel(ICoinMarketCapApiService coinMarketCapApiService)
+    public MainViewModel(ICoinMarketCapApiService coinMarketCapApiService)
     {
         ArgumentNullException.ThrowIfNull(coinMarketCapApiService);
         _coinMarketCapApiService = coinMarketCapApiService;
