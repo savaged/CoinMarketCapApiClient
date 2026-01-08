@@ -6,8 +6,13 @@ public class View : IView
 
     public void Show()
     {
-        if (DataContext is IIndexViewModel ivm && ivm.Index?.Count() > 0)
-            Console.WriteLine(Convert(ivm.Index));
+        if (DataContext is IIndexViewModel ivm)
+        {
+            if (ivm.Index?.Count() > 0)
+                Console.WriteLine(Convert(ivm.Index));
+            else
+                Console.WriteLine(ivm.Status);
+        }
     }
 
     public async Task LoadAsync()

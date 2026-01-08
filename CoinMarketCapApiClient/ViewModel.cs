@@ -23,5 +23,5 @@ public class ViewModel : IIndexViewModel
 
     public IEnumerable<Model> Index { get; private set; } = [];
 
-    public string Status { get; private set; } = string.Empty;
+    public string Status { get; private set; } = "Not loaded";
 }
