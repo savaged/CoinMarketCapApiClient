@@ -1,7 +1,7 @@
 ﻿using CoinMarketCapApiClient;
 
-var watchlist = new Watchlist();
-var model = await CoinMarketCapApiService.LoadLatestAsync();
-
-Console.WriteLine(PresentationService.Show(model, watchlist));
+var vm = new ViewModel();
+var view = new View();
+await view.LoadAsync();
+view.Show();
 

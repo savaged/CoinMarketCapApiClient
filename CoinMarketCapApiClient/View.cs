@@ -1,14 +1,19 @@
 ﻿namespace CoinMarketCapApiClient;
 
-public static class PresentationService
+public class View
 {
-    public static string Show(Root? root, Watchlist watchlist)
+    public object? DataContext { get; set; }
+
+    public void Show()
     {
-        if (root is null || root.data is null)
-            return "No data available!";
-        if (watchlist is null || watchlist.Count == 0)
-            return "Empty watchlist!";
-        return Convert(ModelMappingService.Map(WatchlistFilteringService.Filter(root, watchlist)));
+        if (DataContext is IIndexViewModel ivm)
+            Console.WriteLine(Convert(ivm.Index));
+    }
+
+    public async Task LoadAsync()
+    {
+        if (DataContext is IIndexViewModel ivm)
+            await ivm.LoadAsync();
     }
 
     private static string Convert(IEnumerable<Model> list)
