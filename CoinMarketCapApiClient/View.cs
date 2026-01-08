@@ -1,4 +1,6 @@
-﻿namespace CoinMarketCapApiClient;
+﻿using ConsoleTables;
+
+namespace CoinMarketCapApiClient;
 
 public class View : IView
 {
@@ -9,7 +11,7 @@ public class View : IView
         if (DataContext is IIndexViewModel ivm)
         {
             if (ivm.Index?.Count() > 0)
-                Console.WriteLine(Convert(ivm.Index));
+                ConsoleTable.From<Model>(ivm.Index).Write(Format.MarkDown);
             else
                 Console.WriteLine(ivm.Status);
         }
@@ -20,18 +22,5 @@ public class View : IView
         if (DataContext is IIndexViewModel ivm)
             await ivm.LoadAsync();
     }
-
-    private static string Convert(IEnumerable<Model> list)
-    {
-        if (list is null)
-            return string.Empty;
-        var sb = new System.Text.StringBuilder();
-        foreach (var crypto in list)
-            sb.AppendLine(Line(crypto));
-        return sb.ToString();
-    }
-
-    private static string Line(Model m) =>
-        $"{m.Name} ({m.Symbol}): ${m.Price:F2} {m.Percent_change_1h:F2}% @{m.LastUpdated}";
 
 }
