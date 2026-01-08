@@ -8,14 +8,8 @@ public static class PresentationService
             return "No data available!";
         if (watchlist is null || watchlist.Count == 0)
             return "Empty watchlist!";
-        return Convert(ModelMappingService.Map(Filter(root, watchlist)));
+        return Convert(ModelMappingService.Map(WatchlistFilteringService.Filter(root, watchlist)));
     }
-
-    private static IEnumerable<Datum> Filter(Root root, Watchlist watchlist) =>
-        root.data.Where(datum =>
-            datum.symbol is not null
-            && watchlist.ContainsKey(datum.symbol)
-            && watchlist[datum.symbol] == datum.name);
 
     private static string Convert(IEnumerable<Model> list)
     {
