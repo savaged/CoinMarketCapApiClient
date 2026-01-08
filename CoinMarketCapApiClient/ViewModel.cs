@@ -2,6 +2,14 @@
 
 public class ViewModel : IIndexViewModel
 {
+    private readonly ICoinMarketCapApiService _coinMarketCapApiService;
+
+    public ViewModel(ICoinMarketCapApiService coinMarketCapApiService)
+    {
+        ArgumentNullException.ThrowIfNull(coinMarketCapApiService);
+        _coinMarketCapApiService = coinMarketCapApiService;
+    }
+
     public async Task LoadAsync()
     {
         Status = string.Empty;
@@ -11,7 +19,7 @@ public class ViewModel : IIndexViewModel
             Status = "No watchlist!";
             return;
         }
-        var root = await CoinMarketCapApiService.LoadLatestAsync();
+        var root = await _coinMarketCapApiService.LoadLatestAsync();
         if (root is null || root.data is null)
         {
             Status = "No data returned from API!";

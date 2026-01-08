@@ -4,40 +4,45 @@ using System.Text.Json;
 
 namespace CoinMarketCapApiClient;
 
-public static class CoinMarketCapApiService
+public class CoinMarketCapApiService : ICoinMarketCapApiService
 {
-    private const string API_ENV = "pro"; // Change to "sandbox" for sandbox environment
-    private static readonly HttpClient _httpClient = new();
+    private readonly string _apiEnv;
+    private readonly string _apiKey;
+    private readonly HttpClient _httpClient = new();
 
-    public static async Task<Root?> LoadLatestAsync()
+    public CoinMarketCapApiService(string apiEnv, string apiKey)
     {
-        var latest = await DownloadLatestAsync();
-        var root = JsonSerializer.Deserialize<Root>(latest);
-        return root;
+        if (string.IsNullOrWhiteSpace(apiEnv))
+            throw new ArgumentNullException(nameof(apiEnv));
+        _apiEnv = apiEnv;
+        if (string.IsNullOrWhiteSpace(apiKey))
+            throw new ArgumentNullException(nameof(apiKey));
+        _apiKey = apiKey;
     }
 
-    private static async Task<string> DownloadLatestAsync()
+    public async Task<Root?> LoadLatestAsync() =>
+        JsonSerializer.Deserialize<Root>(await DownloadLatestAsync());
+
+    private async Task<string> DownloadLatestAsync()
     {
         using var request = new HttpRequestMessage(HttpMethod.Get, BuildQueryString(BuildQueryParams()));
-        request.Headers.Add("X-CMC_PRO_API_KEY", "3ba7c384-939c-4d9c-83ce-1c6dfb206db2");
+        request.Headers.Add("X-CMC_PRO_API_KEY", _apiKey);
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
         using var response = await _httpClient.SendAsync(request);
-        response.EnsureSuccessStatusCode();
-
+        using var _ = response.EnsureSuccessStatusCode();
         return await response.Content.ReadAsStringAsync();
     }
 
-    private static Dictionary<string, string?> BuildQueryParams() =>
-        new Dictionary<string, string?>
-        {
-            ["start"] = "1",
-            ["limit"] = "5000",
-            ["convert"] = "USD"
-        };
+    private static Dictionary<string, string?> BuildQueryParams() => new()
+    {
+        ["start"] = "1",
+        ["limit"] = "5000",
+        ["convert"] = "USD"
+    };
 
-    private static string BuildQueryString(Dictionary<string, string?> queryParams) =>
+    private string BuildQueryString(Dictionary<string, string?> queryParams) =>
         QueryHelpers.AddQueryString(
-            $"https://{API_ENV}-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
+            $"https://{_apiEnv}-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
             queryParams);
 }

@@ -10,6 +10,9 @@
     <ItemGroup>
         <PackageReference Include="ConsoleTables" Version="2.7.0" />
         <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="10.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
     </ItemGroup>
 
 </Project>
