@@ -1,5 +1,5 @@
 ﻿namespace CoinMarketCapApiClient;
 
-public interface IViewModel : ILoadable
+public interface IViewModel : ILoadable, ILoadedStatusFeedback
 {
 }

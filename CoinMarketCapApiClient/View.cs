@@ -1,12 +1,12 @@
 ﻿namespace CoinMarketCapApiClient;
 
-public class View
+public class View : IView
 {
     public object? DataContext { get; set; }
 
     public void Show()
     {
-        if (DataContext is IIndexViewModel ivm)
+        if (DataContext is IIndexViewModel ivm && ivm.Index?.Count() > 0)
             Console.WriteLine(Convert(ivm.Index));
     }
 
@@ -26,7 +26,7 @@ public class View
         return sb.ToString();
     }
 
-    private static string Line(Model c) =>
-        $"{c.Name} ({c.Symbol}): ${c.Price:F2} {c.Percent_change_1h:F2}%";
+    private static string Line(Model m) =>
+        $"{m.Name} ({m.Symbol}): ${m.Price:F2} {m.Percent_change_1h:F2}% @{m.LastUpdated}";
 
 }

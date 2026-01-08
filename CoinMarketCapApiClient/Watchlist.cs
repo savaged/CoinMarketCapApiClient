@@ -2,6 +2,7 @@
 
 public class Watchlist : Dictionary<string, string>
 {
+    // TODO load this from file
     public Watchlist()
     {
         Add("BTC", "Bitcoin");
