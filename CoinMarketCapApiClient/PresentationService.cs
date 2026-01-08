@@ -8,7 +8,7 @@ public static class PresentationService
             return "No data available!";
         if (watchlist is null || watchlist.Count == 0)
             return "Empty watchlist!";
-        return Convert(Convert(Filter(root, watchlist)));
+        return Convert(ModelMappingService.Map(Filter(root, watchlist)));
     }
 
     private static IEnumerable<Datum> Filter(Root root, Watchlist watchlist) =>
@@ -16,16 +16,6 @@ public static class PresentationService
             datum.symbol is not null
             && watchlist.ContainsKey(datum.symbol)
             && watchlist[datum.symbol] == datum.name);
-
-    private static IEnumerable<Crypto> Convert(IEnumerable<Datum> data)
-    {
-        if (data is null)
-            return [];
-        List<Crypto> list = [];
-        foreach (var d in data)
-            list.Add(new Crypto(d));
-        return list;
-    }
 
     private static string Convert(IEnumerable<Crypto> list)
     {
