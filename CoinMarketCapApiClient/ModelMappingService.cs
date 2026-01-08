@@ -2,13 +2,13 @@
 
 public static class ModelMappingService
 {
-    public static IEnumerable<Crypto> Map(IEnumerable<Datum> data)
+    public static IEnumerable<Model> Map(IEnumerable<Datum> data)
     {
         if (data is null)
             return [];
-        List<Crypto> list = [];
+        List<Model> list = [];
         foreach (var d in data)
-            list.Add(new Crypto(d));
+            list.Add(new Model(d));
         return list;
     }
 }

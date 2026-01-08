@@ -17,7 +17,7 @@ public static class PresentationService
             && watchlist.ContainsKey(datum.symbol)
             && watchlist[datum.symbol] == datum.name);
 
-    private static string Convert(IEnumerable<Crypto> list)
+    private static string Convert(IEnumerable<Model> list)
     {
         if (list is null)
             return string.Empty;
@@ -27,7 +27,7 @@ public static class PresentationService
         return sb.ToString();
     }
 
-    private static string Line(Crypto c) =>
+    private static string Line(Model c) =>
         $"{c.Name} ({c.Symbol}): ${c.Price:F2} {c.Percent_change_1h:F2}%";
 
 }

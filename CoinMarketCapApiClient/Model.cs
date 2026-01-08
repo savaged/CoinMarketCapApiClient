@@ -1,8 +1,8 @@
 ﻿namespace CoinMarketCapApiClient;
 
-public struct Crypto
+public struct Model
 {
-    public Crypto(Datum d)
+    public Model(Datum d)
     {
         if (d is null)
             throw new NullReferenceException(nameof(Datum));
