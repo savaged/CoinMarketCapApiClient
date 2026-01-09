@@ -23,9 +23,6 @@ public class ConsoleView : IView
             await ivm.LoadAsync();
     }
 
-    public void Clear()
-    {
-        // TODO
-    }
+    public void Clear() => Console.Clear();
 
 }
