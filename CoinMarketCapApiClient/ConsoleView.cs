@@ -11,7 +11,9 @@ public class ConsoleView : IView
         if (DataContext is IIndexViewModel ivm)
         {
             if (ivm.Index?.Count() > 0)
-                ConsoleTable.From<Model>(ivm.Index).Write(Format.MarkDown);
+                ConsoleTable.From<Model>(ivm.Index)
+                    .Configure(c => c.NumberAlignment = Alignment.Right)
+                    .Write(Format.MarkDown);
             else
                 Console.WriteLine(ivm.Status);
         }

@@ -12,7 +12,8 @@ public static class ConfigBuilder
     /// {
     ///   "CoinMarketCap": {
     ///     "Environment": "pro",
-    ///     "ApiKey": "REPLACE_WITH_YOUR_API_KEY"
+    ///     "ApiKey": "REPLACE_WITH_YOUR_API_KEY",
+    ///     "RefreshDelay": "20000"
     ///   }
     /// }
     /// </code>

@@ -33,7 +33,7 @@ try
         consoleView.Show();
         // Pass the token to Task.Delay.
         // If cts.Cancel() is called, this delay terminates immediately.
-        await Task.Delay(10000, cts.Token);
+        await Task.Delay(int.TryParse(config["CoinMarketCap:RefreshDelay"], out int i) ? i : 20000, cts.Token);
     }
 }
 catch (OperationCanceledException)
